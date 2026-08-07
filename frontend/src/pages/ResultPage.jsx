@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSession } from '../context/SessionContext.jsx';
 import ClassificationResult from '../components/ClassificationResult.jsx';
@@ -8,8 +8,13 @@ export default function ResultPage() {
   const navigate = useNavigate();
   const { session, lastResult, isGuest } = useSession();
 
+  useEffect(() => {
+    if (!session) {
+      navigate('/');
+    }
+  }, [session, navigate]);
+
   if (!session) {
-    navigate('/');
     return null;
   }
 

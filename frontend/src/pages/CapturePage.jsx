@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSession } from '../context/SessionContext.jsx';
 import { classifyImage } from '../services/api.js';
@@ -13,8 +13,13 @@ export default function CapturePage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  useEffect(() => {
+    if (!session) {
+      navigate('/');
+    }
+  }, [session, navigate]);
+
   if (!session) {
-    navigate('/');
     return null;
   }
 

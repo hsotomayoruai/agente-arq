@@ -15,7 +15,7 @@ function awardPoints(customerId, classificationId, wasteType) {
   }
 
   const points = POINTS_PER_TYPE[wasteType];
-  if (!points) {
+  if (points === undefined) {
     return 0;
   }
 
